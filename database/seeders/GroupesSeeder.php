@@ -15,15 +15,16 @@ class GroupesSeeder extends Seeder
      */
     public function run()
     {
-        Groupes::truncate();
 
         $json = File::get("database/data/data.json");
-        $datas = json_decode($json);
+        $groupes = json_decode($json, false, 512, JSON_THROW_ON_ERROR);
 
-        Groupes::create(
-            [
-             "groupe" => $value->group_letter
-            ]
-            );
+        foreach ($groupes as $obj) {
+            foreach ($obj as $groupe){
+            Groupes::create([
+                "groupe" => $groupe->letter,
+            ]);
+            }
+        }
     }
 }
