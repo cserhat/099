@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Equipes;
 
 class EquipesContoller extends Controller
 {
@@ -13,7 +14,8 @@ class EquipesContoller extends Controller
      */
     public function index()
     {
-        //
+        $equipes = Equipes::take(32)->get();
+        return view ('equipes.index', compact('equipes'));  
     }
 
     /**
@@ -23,7 +25,7 @@ class EquipesContoller extends Controller
      */
     public function create()
     {
-        //
+ 
     }
 
     /**

@@ -19,7 +19,10 @@ class EquipesSeeder extends Seeder
 
         $json = File::get("database/data/data.json");
         $groupes = json_decode($json, false, 512, JSON_THROW_ON_ERROR);
+        $flag_json = File::get("database/data/country.json");
+        $flags = json_decode($flag_json,false, 512,JSON_THROW_ON_ERROR);
 
+        foreach($flags as $flag){
         foreach ($groupes as $obj) {
             foreach ($obj as $groupe){
                 foreach($groupe->teams as $result)
@@ -31,14 +34,17 @@ class EquipesSeeder extends Seeder
                     
                     foreach($groupe as $groupe_id)
                     {
+                    if($flag->name == $result->name){
                     Equipes::create([
                         "pays" => $result->name,
-                        "drapeau" => $result->country,
+                        "drapeau" => $flag->flag_4x3,
                         "groupe_id" => $groupe_id->id
                     ]);
+                }
                     }
                  }
                 }
                 }
             }
+    }
         }

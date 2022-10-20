@@ -13,4 +13,8 @@ class Equipes extends Model
     protected $fillable = [
         'pays','drapeau','groupe_id','created_at','updated_at'
     ];
+    public function getGroupes()
+    {
+        return $this->hasOne(Groupes::class,'groupe_id','id');
+    }
 }
