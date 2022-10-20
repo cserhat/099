@@ -15,10 +15,9 @@ class GroupesSeeder extends Seeder
      */
     public function run()
     {
-
+        
         $json = File::get("database/data/data.json");
         $groupes = json_decode($json, false, 512, JSON_THROW_ON_ERROR);
-
         foreach ($groupes as $obj) {
             foreach ($obj as $groupe){
             Groupes::create([
