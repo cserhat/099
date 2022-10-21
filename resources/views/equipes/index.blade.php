@@ -11,18 +11,38 @@
         <th>Equipes Nationalles</th>
         <th>Logo</th>
         <th>Groupe</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
-    @foreach($equipes as $groupe)
+
+
+  @foreach($equipes as $equipe)
       <tr>
-        <td>{{ $groupe->pays }}</td>
+        <td>{{ $equipe->pays }}</td>
         <td>
         <div class="text-center">
-          <img  class="rounded" style="height:30px" src="{{ $groupe->drapeau }}" alt="">
+          <img  class="rounded" style="height:30px" src="{{ $equipe->drapeau }}" alt="">
         </div>
         </td>
-        <td>{{ $groupe->groupe_id }}</td>
+        
+        @foreach($groupes as $test)
+        @if($test->id == $equipe->groupe_id)
+        
+        <td><div class="text-center">{{ $test->groupe }} </div></td>
+        <td class="md-4">
+        <div class="text-center">
+        <a href="{{ url('/equipes/'.$equipe->id) }}">  <button type="button" class="btn btn-primary">View</button></a>
+        <a href="{{ url('/equipes/'.$equipe->id.'/edit') }}"> <button type="button" class="btn btn-warning">Edit</button></a>
+        <form method="post" action="{{ url('/equipes' .'/' .$equipe->id ) }}">
+          {{ method_field('DELETE') }}
+          {{ csrf_field() }}
+        <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+        <div>
+        </td>
+        @endif
+        @endforeach
       </tr>
 @endforeach
 </tr>
