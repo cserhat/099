@@ -26,7 +26,8 @@ class EquipesContoller extends Controller
      */
     public function create()
     {
- 
+        $groupes = Groupes::all();
+        return view('equipes.ajouter')->with('groupes', $groupes);
     }
 
     /**
@@ -37,7 +38,9 @@ class EquipesContoller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        Equipes::create($input);
+        return redirect('equipes')->with('flash_message', 'Equipes bien ajouter');
     }
 
     /**

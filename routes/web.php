@@ -16,6 +16,8 @@ use App\Http\Controllers\GroupesController;
 
 Route::resource("/",EquipesContoller::class);
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource("/home",EquipesContoller::class);
 Route::resource("/equipes",EquipesContoller::class);
+
+
+
